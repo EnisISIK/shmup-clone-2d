@@ -26,9 +26,45 @@ namespace AlienInvasion
         Vector3 _currentVelocity;
         Vector3 _targetPosition;
 
+        private bool _gameRunning = false;
+        private float _tempMinX;
+        private float _tempMaxX;
+        private float _tempMinY;
+        private float _tempMaxY;
+
         private void Start()
         {
             _input = GetComponent<InputReader>();
+            AnchorPlayerToCenter();
+        }
+        
+        private void AnchorPlayerToCenter()
+        {
+            _tempMinY = _minY;
+            _tempMaxY = _maxY;
+            _tempMinX = _minX;
+            _tempMaxX = _maxX;
+
+            _minY = 0;
+            _maxY = 0;
+            _minX = 0;
+            _maxX = 0;
+        }
+
+
+        private void OnEnable()
+        {
+            MainMenuUI.Callback += GameRunning;
+        }
+
+        private void GameRunning()
+        {
+            _minY = _tempMinY;
+            _maxY = _tempMaxY;
+            _minX = _tempMinX;
+            _maxX = _tempMaxX;
+            
+            MainMenuUI.Callback -= GameRunning;
         }
 
         private void Update()

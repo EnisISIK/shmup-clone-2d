@@ -18,6 +18,8 @@ namespace AlienInvasion
         float _spawnTimer;
         int _enemiesSpawned;
 
+        bool _spawningEnabled = false;
+
         private void OnValidate()
         {
             _splines = new List<SplineContainer>(GetComponentsInChildren<SplineContainer>());
@@ -28,8 +30,21 @@ namespace AlienInvasion
             _enemyFactory = new EnemyFactory();
         }
 
+        private void OnEnable()
+        {
+            MainMenuUI.Callback += EnableSpawning;
+        }
+
+        private void EnableSpawning()
+        {
+            _spawningEnabled = true;
+            MainMenuUI.Callback -= EnableSpawning;
+        }
+
         private void Update()
         {
+            if (!_spawningEnabled) return;
+
             _spawnTimer += Time.deltaTime;
 
             if (_enemiesSpawned < _maxEnemies && _spawnTimer >= _spawnInterval)
