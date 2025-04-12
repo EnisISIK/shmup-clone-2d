@@ -25,7 +25,7 @@ namespace AlienInvasion
             projectileComponent.SetSpeed(_projectileSpeed);
             projectileComponent.Callback = () =>
             {
-                Vector3 direction = (target.position - projectile.transform.position).With(z:firePoint.position.z).normalized;
+                Vector3 direction = (target.position - projectile.transform.position).With(z:0).normalized;
 
                 Quaternion rotation = Quaternion.LookRotation(direction, Vector3.forward);
                 projectile.transform.rotation = Quaternion.Slerp(projectile.transform.rotation, rotation, _trackingSpeed * Time.deltaTime);
