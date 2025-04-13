@@ -364,6 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 238730538}
   - component: {fileID: 238730539}
+  - component: {fileID: 238730540}
   m_Layer: 0
   m_Name: BackgroundParallax
   m_TagString: Untagged
@@ -440,6 +441,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &238730540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238730537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ffae3581d255214fbfbb895c661435f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 330585543}
+  parallaxEffect: 0.8
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,7 +1582,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059044214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e1dd0cb02295e141bfa8cc8bc5f6a5a, type: 3}
   m_Name: 
@@ -2033,6 +2048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1756140900}
   - component: {fileID: 1756140901}
+  - component: {fileID: 1756140902}
   m_Layer: 0
   m_Name: Clouds
   m_TagString: Untagged
@@ -2109,6 +2125,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1756140902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756140899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ffae3581d255214fbfbb895c661435f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 330585543}
+  parallaxEffect: 0.4
 --- !u!1 &1775752955
 GameObject:
   m_ObjectHideFlags: 0
