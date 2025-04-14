@@ -18,8 +18,6 @@ namespace AlienInvasion
         [SerializeField]
         private Button _exitButton;
 
-        public static Action Callback; 
-
         public override void Initialize()
         {
             _startButton.onClick.AddListener(() => StartGame());
@@ -31,7 +29,7 @@ namespace AlienInvasion
         {
             ViewManager.Show<InGameMenuUI>(false);
 
-            Callback?.Invoke();
+            GameManager.Instance.UpdateGameState(GameState.StartGame);
         }
     }
 }

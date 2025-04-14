@@ -54,22 +54,22 @@ namespace AlienInvasion
 
         private void OnEnable()
         {
-            MainMenuUI.Callback += GameRunning;
+            GameManager.OnGameStateChanged += OnGameStart;
         }
 
-        private void GameRunning()
+        private void OnGameStart(GameState state)
         {
             _minY = _tempMinY;
             _maxY = _tempMaxY;
             _minX = _tempMinX;
             _maxX = _tempMaxX;
-            
-            MainMenuUI.Callback -= GameRunning;
+
+            GameManager.OnGameStateChanged -= OnGameStart;
         }
 
         private void Update()
         {
-            _targetPosition += new Vector3(_input.Move.x, _input.Move.y, 0f) * (_speed * Time.deltaTime);
+            _targetPosition += new Vector3(_input.Move.x, _input.Move.y, 0f) * (_speed * GameManager.Instance.CurrentSpeed() *  Time.deltaTime);
 
             var minPlayerX = _cameraFollow.position.x + _minX;
             var maxPlayerX = _cameraFollow.position.x + _maxX;

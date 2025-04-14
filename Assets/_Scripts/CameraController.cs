@@ -14,7 +14,7 @@ namespace AlienInvasion
 
         private void LateUpdate()
         {
-            transform.position += Vector3.up * _speed * Time.deltaTime;
+            transform.position += Vector3.up * _speed * GameManager.Instance.CurrentSpeed() *Time.deltaTime;
         }
 
     }

@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 1627422559649000403}
   - component: {fileID: 2872075444526884645}
   - component: {fileID: 7469585740452739314}
+  - component: {fileID: 5166375022631734515}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a234fedbb92f3944a9edaac394849bb4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,6 +138,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5166375022631734515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6165345679395994788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ecb381fca01954aaae2112eceb93cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashColor: {r: 0.6509804, g: 0.18039216, b: 0.18039216, a: 1}
+  _flashTime: 0.25
 --- !u!1 &8348599885901589476
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,3 +289,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 10
+  _damageFlash: {fileID: 5166375022631734515}
+  _healthPack: {fileID: 4488288474812263825, guid: 8946c2c0712ce7541ad16131d388064e,
+    type: 3}

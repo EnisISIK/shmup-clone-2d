@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 330585543}
-  parallaxEffect: 0.8
+  parallaxEffect: 0.4
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,7 +1421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746f6d114065a33489bf156280d034fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStrategy: {fileID: 11400000, guid: 771ec3c255b2bc24791fc5ca0b1b6dec, type: 2}
+  weaponStrategy: {fileID: 11400000, guid: 81ac9fef27fe1704f997d207cffda4ae, type: 2}
   firePoint: {fileID: 1481459611}
   layer: 6
 --- !u!114 &845122505
@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 330585543}
-  parallaxEffect: 0.4
+  parallaxEffect: 0.1
 --- !u!1 &1775752955
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,6 +2183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906702d59cb1c9d4f86f8d09ca66692e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: 0
 --- !u!1 &1819167323
 GameObject:
   m_ObjectHideFlags: 0

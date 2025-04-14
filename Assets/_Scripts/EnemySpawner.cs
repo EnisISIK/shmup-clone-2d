@@ -32,13 +32,24 @@ namespace AlienInvasion
 
         private void OnEnable()
         {
-            MainMenuUI.Callback += EnableSpawning;
+            GameManager.OnGameStateChanged += EnableSpawning;
+            Enemy.Callback += DecreaseSpawned;
         }
 
-        private void EnableSpawning()
+        private void OnDisable()
         {
-            _spawningEnabled = true;
-            MainMenuUI.Callback -= EnableSpawning;
+            Enemy.Callback -= DecreaseSpawned;
+        }
+
+        private void DecreaseSpawned()
+        {
+            _enemiesSpawned--;
+        }
+
+        private void EnableSpawning(GameState state)
+        {
+            _spawningEnabled = true; 
+            GameManager.OnGameStateChanged -= EnableSpawning;
         }
 
         private void Update()

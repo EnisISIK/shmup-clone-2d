@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace AlienInvasion
     {
 
         [SerializeField]
-        private int _healthAndMag;
+        private int _healthAndMag = 10;
 
         [SerializeField]
         private int _maxAmmo = 45; //Can be 30 - 45 - 60. TO TEST
@@ -22,6 +23,21 @@ namespace AlienInvasion
         private void Start()
         {
             _ammo = _maxAmmo;
+        }
+
+        private void OnEnable()
+        {
+            HealthPack.OnHealthPackCollected += AddHealth;
+        }
+
+        private void OnDisable()
+        {
+            HealthPack.OnHealthPackCollected -= AddHealth;
+        }
+
+        private void AddHealth()
+        {
+            _healthAndMag++;
         }
 
         public override void Die()
@@ -41,7 +57,6 @@ namespace AlienInvasion
             if(_ammo <= 0)
             {
                 if (_healthAndMag <= 1) return;
-                Debug.Log("Reloading");
                 RefillAmmo();
             }
         }
@@ -50,8 +65,6 @@ namespace AlienInvasion
         {
             _healthAndMag -= 1;
             _ammo = _maxAmmo;
-            Debug.Log("Player Health : " + _healthAndMag);
-            //TODO: Ammo Reference Logic. Probably to use a Callback
             DeathCheck();
         }
 

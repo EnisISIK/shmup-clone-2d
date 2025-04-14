@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AlienInvasion
 {
@@ -10,6 +11,7 @@ namespace AlienInvasion
         float _fireTimer;
 
         private bool _gameStarted = false;
+        private bool _fireSwitch = false;
 
         private void Awake()
         {
@@ -19,18 +21,22 @@ namespace AlienInvasion
 
         private void OnEnable()
         {
-            MainMenuUI.Callback += OnGameStart;
+            GameManager.OnGameStateChanged += OnGameStart;
         }
 
-        private void OnGameStart()
+        private void OnGameStart(GameState state)
         {
             _gameStarted = true;
-            MainMenuUI.Callback -= OnGameStart;
+            GameManager.OnGameStateChanged -= OnGameStart;
         }
 
         private void Update()
         {
             if (!_gameStarted) return;
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                _fireSwitch = !_fireSwitch;
+            }
 
             _fireTimer += Time.deltaTime;
 
@@ -39,7 +45,8 @@ namespace AlienInvasion
 
         private void Fire()
         {
-            if (input.Fire && _fireTimer >= weaponStrategy.FireRate && player.GetAmmo() > 0)
+
+            if (_fireSwitch && _fireTimer >= weaponStrategy.FireRate && player.GetAmmo() > 0)
             {
                 player.ReduceAmmo(1);
                 weaponStrategy.Fire(firePoint, layer);
