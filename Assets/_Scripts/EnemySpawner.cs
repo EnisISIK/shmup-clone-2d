@@ -38,6 +38,7 @@ namespace AlienInvasion
 
         private void OnDisable()
         {
+            GameManager.OnGameStateChanged -= EnableSpawning;
             Enemy.Callback -= DecreaseSpawned;
         }
 
@@ -48,8 +49,10 @@ namespace AlienInvasion
 
         private void EnableSpawning(GameState state)
         {
-            _spawningEnabled = true; 
-            GameManager.OnGameStateChanged -= EnableSpawning;
+            if (state != GameState.GameOver)
+                _spawningEnabled = true;
+            else
+                _spawningEnabled = false;
         }
 
         private void Update()

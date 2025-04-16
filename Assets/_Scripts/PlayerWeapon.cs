@@ -24,10 +24,17 @@ namespace AlienInvasion
             GameManager.OnGameStateChanged += OnGameStart;
         }
 
+        private void OnDisable()
+        {
+            GameManager.OnGameStateChanged -= OnGameStart;
+        }
+
         private void OnGameStart(GameState state)
         {
-            _gameStarted = true;
-            GameManager.OnGameStateChanged -= OnGameStart;
+            if (state != GameState.GameOver)
+                _gameStarted = true;
+            else
+                _gameStarted = false;
         }
 
         private void Update()

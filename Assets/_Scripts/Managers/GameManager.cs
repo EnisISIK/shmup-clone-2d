@@ -8,6 +8,7 @@ namespace AlienInvasion
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
+        public Player Player => _player;
 
         public GameState State;
 
@@ -15,25 +16,24 @@ namespace AlienInvasion
         private Transform _cameraTransform;
         private int _score;
 
-        private int _money;
+        private PlayerData _playerData;
 
         //GAME SPEEDS UP OVERTIME BASED ON DISTANCE
         private float _currentSpeed = 1;
-        private float _speedIncreaseRate = 0.1f;
-
-        private float _distanceTraveledDifficulty = 0;
-        private float _lastPositionY;
 
         //FOR DISTANCE TRAVELED CALCULATIONS
         private float _totalDistance = 0;
+        private float _distanceTraveledDifficulty = 0;
+        private float _lastPositionY;
 
         public bool IsGameOver() => _player.GetHealth() <= 0;
         private bool _gameStarted = false;
 
-        public float CurrentSpeed() => _currentSpeed;
+        public float CurrentGameSpeed() => _currentSpeed;
         public int Score() => _score;
-
-        public int Money() => _money;
+        public int Money() => _playerData.money;
+        public int PlayerHealth() => _playerData.healthUpgrades;
+        public int PlayerAmmoCapacity() => _playerData.ammoCapacityUpgrades * 5;
 
         //EVENTS
         public static event Action<GameState> OnGameStateChanged;
@@ -51,6 +51,8 @@ namespace AlienInvasion
 
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _cameraTransform = Camera.main.gameObject.transform;
+
+            _playerData = GetPlayerData() ?? new PlayerData();
         }
 
         private void Update()
@@ -76,6 +78,11 @@ namespace AlienInvasion
             _lastPositionY = _cameraTransform.position.y;
         }
 
+        private PlayerData GetPlayerData()
+        {
+            return JsonHandler.DeserializeData<PlayerData>("PlayerData");
+        }
+
         public void UpdateGameState(GameState newState)
         {
             State = newState;
@@ -97,10 +104,19 @@ namespace AlienInvasion
 
         private void HandleGameOver()
         {
+            _playerData.money += Score();
+
+            JsonHandler.SerializeData<PlayerData>(_playerData, "PlayerData");
+
+            Time.timeScale = 0;
+
+            ViewManager.Show<GameOverMenuUI>(true);
+
         }
 
         private void HandlePlay()
         {
+            Time.timeScale = 1;
         }
 
         private void HandleStartGame()
@@ -110,16 +126,27 @@ namespace AlienInvasion
             UpdateGameState(GameState.Play);
         }
 
+        public void HandleBuy(UpgradeType upgrade)
+        {
+            _playerData.money -= 100;
+
+            switch(upgrade)
+            {
+                case UpgradeType.Health:
+                    _playerData.healthUpgrades++;
+                    break;
+                case UpgradeType.AmmoCapacity:
+                    _playerData.ammoCapacityUpgrades++;
+                    break;
+            }
+
+            JsonHandler.SerializeData<PlayerData>(_playerData, "PlayerData");
+        }
+
         public void AddScore(int amount)
         {
             _score += amount;
         }
-
-        public int GetScore()
-        {
-            return _score;
-        }
-
     }
 
     public enum GameState

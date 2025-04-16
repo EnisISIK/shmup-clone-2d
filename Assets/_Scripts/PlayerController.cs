@@ -69,7 +69,7 @@ namespace AlienInvasion
 
         private void Update()
         {
-            _targetPosition += new Vector3(_input.Move.x, _input.Move.y, 0f) * (_speed * GameManager.Instance.CurrentSpeed() *  Time.deltaTime);
+            _targetPosition += new Vector3(_input.Move.x, _input.Move.y, 0f) * (_speed * GameManager.Instance.CurrentGameSpeed() *  Time.deltaTime);
 
             var minPlayerX = _cameraFollow.position.x + _minX;
             var maxPlayerX = _cameraFollow.position.x + _maxX;
