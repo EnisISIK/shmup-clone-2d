@@ -15,6 +15,7 @@ namespace AlienInvasion
         private Player _player;
         private Transform _cameraTransform;
         private int _score;
+        private int _sessionMoney = 0;
 
         private PlayerData _playerData;
 
@@ -32,8 +33,10 @@ namespace AlienInvasion
         public float CurrentGameSpeed() => _currentSpeed;
         public int Score() => _score;
         public int Money() => _playerData.money;
+        public int SessionMoney() => _sessionMoney;
         public int PlayerHealth() => _playerData.healthUpgrades;
         public int PlayerAmmoCapacity() => _playerData.ammoCapacityUpgrades * 5;
+
 
         //EVENTS
         public static event Action<GameState> OnGameStateChanged;
@@ -104,9 +107,7 @@ namespace AlienInvasion
 
         private void HandleGameOver()
         {
-            _playerData.money += Score();
-
-            JsonHandler.SerializeData<PlayerData>(_playerData, "PlayerData");
+            _sessionMoney = _score;
 
             Time.timeScale = 0;
 
@@ -141,6 +142,17 @@ namespace AlienInvasion
             }
 
             JsonHandler.SerializeData<PlayerData>(_playerData, "PlayerData");
+        }
+
+        public void HandleLevelChange()
+        {
+
+            JsonHandler.SerializeData<PlayerData>(_playerData, "PlayerData");
+        }
+
+        public void DoubleMoneyAd()
+        {
+            _playerData.money += _sessionMoney * 2;
         }
 
         public void AddScore(int amount)

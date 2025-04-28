@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AlienInvasion
 {
-    public interface IObstacle { 
+    public interface IObstacle {
 
     }
 }

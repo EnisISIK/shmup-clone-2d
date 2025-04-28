@@ -50,6 +50,22 @@ namespace AlienInvasion
             Callback?.Invoke();
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            BulletWall bulletWall = other.GetComponent<BulletWall>();
+            if (bulletWall != null)
+            {
+                if (bulletWall.WallHealth() > 0)
+                    bulletWall.TakeDamage();
+                else
+                {
+                    Destroy(bulletWall.gameObject, 0.2f);
+                }
+            }
+
+            Destroy(gameObject);
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             if (_hitPrefab != null)

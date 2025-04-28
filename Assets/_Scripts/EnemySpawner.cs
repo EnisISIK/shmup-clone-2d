@@ -7,10 +7,14 @@ namespace AlienInvasion
 {
     public class EnemySpawner : MonoBehaviour
     {
+
         [SerializeField] private List<EnemyType> _enemyTypes;
 
         [SerializeField] private int _maxEnemies = 10;
         [SerializeField] private float _spawnInterval = 2f;
+
+        [SerializeField] private int _maxKills = 5;
+        private int _killCount = 0;
 
         List<SplineContainer> _splines;
         EnemyFactory _enemyFactory;
@@ -20,31 +24,37 @@ namespace AlienInvasion
 
         bool _spawningEnabled = false;
 
+        public int EnemiesAlive() => _enemiesSpawned;
+
+        public bool KillsComplete() => _killCount >= _maxKills && _enemiesSpawned <= 0;
+
         private void OnValidate()
         {
-            _splines = new List<SplineContainer>(GetComponentsInChildren<SplineContainer>());
+            
         }
 
         private void Start()
         {
+            _splines = new List<SplineContainer>(GetComponentsInChildren<SplineContainer>());
             _enemyFactory = new EnemyFactory();
         }
 
         private void OnEnable()
         {
-            GameManager.OnGameStateChanged += EnableSpawning;
+            //GameManager.OnGameStateChanged += EnableSpawning;
             Enemy.Callback += DecreaseSpawned;
         }
 
         private void OnDisable()
         {
-            GameManager.OnGameStateChanged -= EnableSpawning;
+            //GameManager.OnGameStateChanged -= EnableSpawning;
             Enemy.Callback -= DecreaseSpawned;
         }
 
         private void DecreaseSpawned()
         {
             _enemiesSpawned--;
+            _killCount++;
         }
 
         private void EnableSpawning(GameState state)
@@ -57,12 +67,14 @@ namespace AlienInvasion
 
         private void Update()
         {
-            if (!_spawningEnabled) return;
+            //if (!_spawningEnabled) return;
 
             _spawnTimer += Time.deltaTime;
 
             if (_enemiesSpawned < _maxEnemies && _spawnTimer >= _spawnInterval)
             {
+                if (_killCount >= _maxKills) return;
+
                 SpawnEnemy();
                 _spawnTimer = 0f;
             }

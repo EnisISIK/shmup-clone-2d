@@ -35,7 +35,7 @@ namespace AlienInvasion
         private void OnEnable()
         {
             _scoreText.text = GameManager.Instance.Score().ToString();
-            _moneyText.text = GameManager.Instance.Money().ToString();
+            _moneyText.text = GameManager.Instance.SessionMoney().ToString();
         }
 
         private void DoubleMoney()
@@ -43,7 +43,8 @@ namespace AlienInvasion
             //Lock Button
             //Show Video Ad
             //Update GameManager
-            _scoreText.text = (GameManager.Instance.Money() * 2).ToString();
+            _moneyText.text = (GameManager.Instance.SessionMoney() * 2).ToString();
+            GameManager.Instance.DoubleMoneyAd();
         }
 
         private void PlayOn()
@@ -57,6 +58,7 @@ namespace AlienInvasion
 
         private void LoadLevel()
         {
+            GameManager.Instance.HandleLevelChange();
             LevelManager.Instance.LoadScene("Level1");
         }
     }

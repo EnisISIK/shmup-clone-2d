@@ -20,6 +20,9 @@ namespace AlienInvasion
         [SerializeField]
         private TMP_Text _ammoText;
 
+        [SerializeField]
+        private TMP_Text _ammoCapacityText;
+
         public override void Initialize()
         {
             _scoreText.text = " 0 ";
@@ -39,7 +42,8 @@ namespace AlienInvasion
 
             _ammoCapacity = GameManager.Instance.Player.GetAmmoCapacity();
             _healthText.text = GameManager.Instance.Player.GetHealth().ToString();
-            _ammoText.text = GameManager.Instance.Player.GetAmmo().ToString() + " / " + _ammoCapacity;
+            _ammoText.text = GameManager.Instance.Player.GetAmmo().ToString();// + " / " + _ammoCapacity;
+            _ammoCapacityText.text = "/"+_ammoCapacity.ToString();
         }
 
         private void OnEnable()
@@ -61,7 +65,7 @@ namespace AlienInvasion
 
         private void UpdateAmmoText(int ammoCount)
         {
-            _ammoText.text = ammoCount.ToString() + " / " + _ammoCapacity;
+            _ammoText.text = ammoCount.ToString();// + " / " + _ammoCapacity;
         }
 
         private void Update()

@@ -16,9 +16,12 @@ namespace AlienInvasion
         [SerializeField]
         private GameObject _healthPack;
 
+        [SerializeField]
+        private int _healthPackDropRate;
+
         public override void Die()
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < _healthPackDropRate; i++)
             {
                 Instantiate(_healthPack,transform.position + new Vector3(UnityEngine.Random.Range(-2f, 2f), 
                                                             UnityEngine.Random.Range(-2f,2f),0), Quaternion.identity);

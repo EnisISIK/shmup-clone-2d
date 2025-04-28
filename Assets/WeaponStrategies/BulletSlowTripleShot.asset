@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06cd91fdde98804bb9d3166d8cab889, type: 3}
+  m_Name: BulletSlowTripleShot
+  m_EditorClassIdentifier: 
+  _damage: 10
+  _fireRate: 3
+  _projectileSpeed: 2
+  _projectileLifetime: 4
+  _projectilePrefab: {fileID: 7165885932092088716, guid: 06a3c374f2e1e4045b6b04df5fe5e88b,
+    type: 3}
+  _spreadAngle: 30

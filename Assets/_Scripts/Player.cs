@@ -30,6 +30,10 @@ namespace AlienInvasion
 
         private bool _diedOnce = false;
 
+        [SerializeField]
+        private DamageFlash _damageFlash;
+
+
         private void OnEnable()
         {
             HealthPack.OnHealthPackCollected += AddHealth;
@@ -72,6 +76,11 @@ namespace AlienInvasion
 
         public override void TakeDamage(int amount)
         {
+            if (_damageFlash != null)
+            {
+                _damageFlash.CallDamageFlash();
+            }
+
             _healthAndMag -= amount;
 
             OnHealthChange?.Invoke(_healthAndMag);
@@ -116,11 +125,11 @@ namespace AlienInvasion
 
         private void OnTriggerEnter(Collider other)
         {
-            IObstacle obstacle = other.GetComponent<IObstacle>();
-            if(obstacle != null)
-            {
-                TakeDamage(2);
-            }
+            //IObstacle obstacle = other.GetComponent<IObstacle>();
+            //if(obstacle != null)
+            //{
+            //    TakeDamage(1);
+            //}
         }
 
     }
