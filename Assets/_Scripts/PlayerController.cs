@@ -32,9 +32,12 @@ namespace AlienInvasion
         private float _tempMinY;
         private float _tempMaxY;
 
+        private Rigidbody _rb;
+
         private void Start()
         {
             _input = GetComponent<InputReader>();
+            _rb = GetComponent<Rigidbody>();
             AnchorPlayerToCenter();
         }
         
@@ -69,7 +72,8 @@ namespace AlienInvasion
 
         private void Update()
         {
-            _targetPosition += new Vector3(_input.Move.x, _input.Move.y, 0f) * (_speed * GameManager.Instance.CurrentGameSpeed() *  Time.deltaTime);
+            _targetPosition += new Vector3(_input.Move.x, _input.Move.y, 0f) * (_speed * GameManager.Instance.CurrentGameSpeed() * Time.deltaTime);
+
 
             var minPlayerX = _cameraFollow.position.x + _minX;
             var maxPlayerX = _cameraFollow.position.x + _maxX;
@@ -88,6 +92,34 @@ namespace AlienInvasion
             var newYRotation = Mathf.LerpAngle(currentYRotation, targetRotationAngle, _leanSpeed * Time.deltaTime);
 
             transform.localEulerAngles = new Vector3(0f, newYRotation, 0f);
+
+
+            //Mobile Version
+            //Vector3 _temp = Camera.main.ScreenToWorldPoint(_input.Move);
+            //_temp.y += 1f;
+            //_temp.z = 0f;
+            //_targetPosition = _temp;
+
+            //var minPlayerX = _cameraFollow.position.x + _minX;
+            //var maxPlayerX = _cameraFollow.position.x + _maxX;
+            //var minPlayerY = _cameraFollow.position.y + _minY;
+            //var maxPlayerY = _cameraFollow.position.y + _maxY;
+
+            //_targetPosition.x = Mathf.Clamp(_targetPosition.x, minPlayerX, maxPlayerX);
+            //_targetPosition.y = Mathf.Clamp(_targetPosition.y, minPlayerY, maxPlayerY);
+
+            ////transform.position = _targetPosition;
+            ////prevent warping
+            //transform.position = Vector3.SmoothDamp(transform.position, _targetPosition, ref _currentVelocity, _smoothness);
+
+            //var targetRotationAngle = ((_input.Move.x / Screen.width) - 0.5f) * _leanAngle * 2f;
+
+            //targetRotationAngle = Mathf.Clamp(targetRotationAngle, -1f, 1f);
+
+            //var currentYRotation = transform.localEulerAngles.y;
+            //var newYRotation = Mathf.LerpAngle(currentYRotation, targetRotationAngle, _leanSpeed * Time.deltaTime);
+
+            //transform.localEulerAngles = new Vector3(0f, newYRotation, 0f);
         }
 
     }

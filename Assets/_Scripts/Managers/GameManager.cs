@@ -37,6 +37,7 @@ namespace AlienInvasion
         public int PlayerHealth() => _playerData.healthUpgrades;
         public int PlayerAmmoCapacity() => _playerData.ammoCapacityUpgrades * 5;
 
+        private const float GAME_SPEED_CAP = 1.5f;
 
         //EVENTS
         public static event Action<GameState> OnGameStateChanged;
@@ -66,19 +67,21 @@ namespace AlienInvasion
             float distanceThisFrame = _cameraTransform.position.y - _lastPositionY;
 
             _totalDistance += distanceThisFrame;
-            _distanceTraveledDifficulty += distanceThisFrame;
-
             _score = (int)_totalDistance;
 
+            _lastPositionY = _cameraTransform.position.y;
 
-            if(_distanceTraveledDifficulty>=25f)
+            //Gradually speeding the game
+            if (_currentSpeed >= GAME_SPEED_CAP) return;
+
+            _distanceTraveledDifficulty += distanceThisFrame;
+            if (_distanceTraveledDifficulty>=25f)
             {
                 _currentSpeed += 0.1f;
 
                 _distanceTraveledDifficulty = 0f;
             }
 
-            _lastPositionY = _cameraTransform.position.y;
         }
 
         private PlayerData GetPlayerData()

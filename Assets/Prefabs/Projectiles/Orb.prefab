@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: d72a1bef022522a42b1ed32ae4f20fcb, type: 3}
   m_Color: {r: 0, g: 0.29465526, b: 0.5999999, a: 1}
   m_FlipX: 0
@@ -154,8 +154,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.20729935, y: 0.112702906, z: 0.1959927}
-  m_Center: {x: 0.003471613, y: -0.0020971, z: -0.0065747127}
+  m_Size: {x: 0.17502637, y: 0.112702906, z: 0.17308933}
+  m_Center: {x: 0.007115297, y: -0.0020971, z: -0.012821078}
 --- !u!1 &8928543469763955975
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 5394250797352405513}
   - component: {fileID: 4003909446999731860}
   m_Layer: 0
-  m_Name: HealthPack
+  m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -443,7 +443,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 0.7
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4953,7 +4953,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 99
+  m_SortingOrder: 100
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

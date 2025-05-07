@@ -22,15 +22,13 @@ namespace AlienInvasion
         float _spawnTimer;
         int _enemiesSpawned;
 
-        bool _spawningEnabled = false;
-
         public int EnemiesAlive() => _enemiesSpawned;
 
         public bool KillsComplete() => _killCount >= _maxKills && _enemiesSpawned <= 0;
 
         private void OnValidate()
         {
-            
+
         }
 
         private void Start()
@@ -41,13 +39,11 @@ namespace AlienInvasion
 
         private void OnEnable()
         {
-            //GameManager.OnGameStateChanged += EnableSpawning;
             Enemy.Callback += DecreaseSpawned;
         }
 
         private void OnDisable()
         {
-            //GameManager.OnGameStateChanged -= EnableSpawning;
             Enemy.Callback -= DecreaseSpawned;
         }
 
@@ -57,17 +53,8 @@ namespace AlienInvasion
             _killCount++;
         }
 
-        private void EnableSpawning(GameState state)
-        {
-            if (state != GameState.GameOver)
-                _spawningEnabled = true;
-            else
-                _spawningEnabled = false;
-        }
-
         private void Update()
         {
-            //if (!_spawningEnabled) return;
 
             _spawnTimer += Time.deltaTime;
 

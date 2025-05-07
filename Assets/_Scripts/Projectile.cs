@@ -45,7 +45,7 @@ namespace AlienInvasion
         private void Update()
         {
             transform.SetParent(null);
-            transform.position += transform.forward * (_speed * GameManager.Instance.CurrentGameSpeed() * Time.deltaTime);
+            transform.position += transform.forward * (_speed * Time.deltaTime); // * GameManager.Instance.CurrentGameSpeed()
 
             Callback?.Invoke();
         }

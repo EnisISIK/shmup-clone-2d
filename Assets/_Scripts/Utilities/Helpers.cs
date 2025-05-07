@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Utilities
 {
     public static class Helpers

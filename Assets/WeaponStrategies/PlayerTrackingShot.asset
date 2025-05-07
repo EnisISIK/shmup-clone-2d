@@ -16,6 +16,6 @@ MonoBehaviour:
   _fireRate: 3
   _projectileSpeed: 2.5
   _projectileLifetime: 5
-  _projectilePrefab: {fileID: 7165885932092088716, guid: b9c6a4eedfdb63b47a4345c632ca6016,
+  _projectilePrefab: {fileID: 7165885932092088716, guid: e6e664184f5efb147aab9d9c56617381,
     type: 3}
   _trackingSpeed: 1

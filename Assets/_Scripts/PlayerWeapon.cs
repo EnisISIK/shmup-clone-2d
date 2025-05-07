@@ -40,7 +40,7 @@ namespace AlienInvasion
         private void Update()
         {
             if (!_gameStarted) return;
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if (input.Fire|| Mouse.current.leftButton.wasPressedThisFrame)//Mouse.current.leftButton.wasPressedThisFrame)
             {
                 _fireSwitch = !_fireSwitch;
             }
